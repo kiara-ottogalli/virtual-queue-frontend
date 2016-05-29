@@ -11,21 +11,25 @@
 angular
   .module('virtualQueueFrontendApp', [
     'ngResource',
-    'ngRoute'
+    'ui.router'
   ])
-  .config(function ($routeProvider) {
-    $routeProvider
-      .when('/', {
-        templateUrl: 'views/main.html',
-        controller: 'MainCtrl',
-        controllerAs: 'main'
+  .config(function ($stateProvider, $urlRouterProvider) {
+    $stateProvider
+      .state('app', {
+		url: '/',
+		views: {
+			'header': { templateUrl: 'views/header.html' },
+			'content': { templateUrl: 'views/main.html', controller: 'MainCtrl' },
+			'footer': { templateUrl: 'views/footer.html' }
+		}
       })
-      .when('/about', {
-        templateUrl: 'views/about.html',
-        controller: 'AboutCtrl',
-        controllerAs: 'about'
-      })
-      .otherwise({
-        redirectTo: '/'
+	  .state('app.about', {
+		url: 'about',
+		views: {
+			'header': { templateUrl: 'views/header.html' },
+			'content@': { templateUrl: 'views/about.html', controller: 'AboutCtrl' },
+			'footer': { templateUrl: 'views/footer.html' }
+		}
       });
+	  $urlRouterProvider.otherwise('/');
   });
