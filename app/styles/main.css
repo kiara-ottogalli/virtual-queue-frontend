@@ -10,7 +10,6 @@ body {
 }
 
 /* Everything but the jumbotron gets side spacing for mobile first views */
-.header,
 .marketing,
 .footer {
   padding-left: 15px;
@@ -19,9 +18,9 @@ body {
 
 /* Custom page header */
 .header {
-  border-bottom: 1px solid #e5e5e5;
   margin-bottom: 10px;
 }
+
 /* Make the masthead heading the same height as the navigation */
 .header h3 {
   margin-top: 0;
@@ -80,4 +79,50 @@ body {
   .jumbotron {
     border-bottom: 0;
   }
+}
+
+/* Kiki's style */
+.m-b-5 { margin-bottom: 50px; }
+
+.hover-gray:hover{ background-color: #c5cae9; }
+
+.no-wrap { white-space: no-wrap; }
+
+h2, p { color: #323232; }
+
+/* The navbar */
+.navbar { 
+	background-color: #303f9f;
+	color: #cddc39;
+}
+/* Each link on the menu */
+.navbar-default .navbar-nav > li > a { 
+	color: #ffffff;
+}
+.navbar-default .navbar-nav > li > a:hover { 
+	color: #cddc39;
+}
+.navbar-default .navbar-nav > li > a:focus { 
+	color: #cddc39;
+}
+/* Brand of the menu */
+.navbar-default .navbar-brand { 
+	color: #ffffff;
+}
+.navbar-default .navbar-brand:hover { 
+	color: #cddc39;
+}
+.navbar-default .navbar-brand:focus { 
+	color: #cddc39;
+}
+/* When the display is small, the toggle button bg color */
+.navbar-default .navbar-toggle:focus {
+    background-color: #3f51b5;
+}
+.navbar-default .navbar-toggle:hover {
+    background-color: #c5cae9;
+}
+/* When the display is small, the toggle button lines color */
+.navbar-default .navbar-toggle .icon-bar {
+    background-color: #ffffff;
 }
