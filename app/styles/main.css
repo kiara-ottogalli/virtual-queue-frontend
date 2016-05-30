@@ -126,3 +126,6 @@ h2, p { color: #323232; }
 .navbar-default .navbar-toggle .icon-bar {
     background-color: #ffffff;
 }
+
+/* Size of doctor and patient photos */
+.img-width-60{ width: 60px; }

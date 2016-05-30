@@ -19,6 +19,9 @@ angular
 				$scope.showSpecialties = true;
 			},
 			function(response) {
-				$scope.message = 'Error: ' + response.status + ' ' + response.statusText;
+				$scope.message = {
+					code: response.status,
+					text: response.statusText
+				};
 			});
 	}]);
