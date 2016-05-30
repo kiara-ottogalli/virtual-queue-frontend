@@ -1,0 +1,42 @@
+<div class="container">
+
+	<div class="row row-content">
+		<div class="col-sm-12">
+			<div class="page-header">
+				<h2>Patients</h2>
+			</div>
+		</div>
+	</div>
+	
+	<div class="row">
+		
+		<div ng-if="showDoctor">
+		
+			<div class="col-xs-12" ng-if="!existPatients">
+				<p>Currently there are no patients to attend.</p>
+			</div>
+		
+			<div class="col-sm-6" ng-if="existPatients" ng-repeat="patient in doctor.patients">
+				<ul class="media-list">
+					<li class="media">
+						<div class="media-left media-middle">
+							<a ui-sref="">
+								<img class="media-object img-thumbnail img-circle img-width-60" ng-src="{{patient.photo}}" alt="{{patient.name}}">
+							</a>
+						</div>
+						<div class="media-body media-middle">
+							<h4 class="media-heading">Dr. {{patient.name}} {{patient.lastname}}</h4>
+						</div>
+					</li>
+				</ul>
+			</div>
+		
+		</div>
+		
+		<div class="col-xs-12" ng-if="!showDoctor">
+            <p class="text-danger">Oops! there's an error: {{message.code}} {{message.text}}</p>
+        </div>
+		
+	</div>
+	
+</div>

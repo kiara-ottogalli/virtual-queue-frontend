@@ -31,8 +31,16 @@ angular
 			'footer': { templateUrl: 'views/footer.html' }
 		}
       })
-	  .state('specialties.doctors.patients', {
-		url: '/:drid',
+	  .state('doctors', {
+		url: '/doctors',
+		views: {
+			'header': { templateUrl: 'views/header.html' },
+			'content': { templateUrl: 'views/patients.html', controller: 'DoctorCtrl' },
+			'footer': { templateUrl: 'views/footer.html' }
+		}
+      })
+	  .state('doctors.patients', {
+		url: '/:id',
 		views: {
 			'header': { templateUrl: 'views/header.html' },
 			'content@': { templateUrl: 'views/patients.html', controller: 'DoctorCtrl' },
