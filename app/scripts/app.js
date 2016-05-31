@@ -27,7 +27,7 @@ angular
 		url: 'specialties/:id/doctors',
 		views: {
 			'header': { templateUrl: 'views/header.html' },
-			'content@': { templateUrl: 'views/doctors.html', controller: 'SpecialtyCtrl' },
+			'content@': { templateUrl: 'views/doctors.html', controller: 'DoctorCtrl' },
 			'footer': { templateUrl: 'views/footer.html' }
 		}
       })
@@ -35,7 +35,7 @@ angular
 		url: '/doctors',
 		views: {
 			'header': { templateUrl: 'views/header.html' },
-			'content': { templateUrl: 'views/patients.html', controller: 'DoctorCtrl' },
+			'content': { templateUrl: 'views/patients.html', controller: 'PatientCtrl' },
 			'footer': { templateUrl: 'views/footer.html' }
 		}
       })
@@ -43,7 +43,7 @@ angular
 		url: '/:id',
 		views: {
 			'header': { templateUrl: 'views/header.html' },
-			'content@': { templateUrl: 'views/patients.html', controller: 'DoctorCtrl' },
+			'content@': { templateUrl: 'views/patients.html', controller: 'PatientCtrl' },
 			'footer': { templateUrl: 'views/footer.html' }
 		}
       })

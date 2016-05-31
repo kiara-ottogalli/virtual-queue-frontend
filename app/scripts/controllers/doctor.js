@@ -5,29 +5,22 @@
  * @name virtualQueueFrontendApp.controller:DoctorCtrl
  * @description
  * # DoctorCtrl
- * Controller of one doctor.
+ * Controller of doctors view.
  */
 angular
 	.module('virtualQueueFrontendApp')
-	.controller('DoctorCtrl', ['$scope', 'userFactory', '$stateParams', function($scope, userFactory, $stateParams) {
-		$scope.showDoctor = false;
-		$scope.existPatients = false;
-		
-		userFactory.get(
+	.controller('DoctorCtrl', ['$scope', 'specialtyFactory', '$stateParams', function($scope, specialtyFactory, $stateParams) {
+		$scope.specialty = {};
+		$scope.showSpecialty = false;
+		$scope.existDoctors = false;
+        
+		specialtyFactory.getSpecialties().get(
 			{id: $stateParams.id},
 			function(response) {
-				$scope.doctor = response;
-				if($scope.doctor.type === 'doctor') {
-					$scope.showDoctor = true;
-					if($scope.doctor.patients.length > 0) {
-						$scope.existPatients = true;
-					}
-				}
-				else {
-					$scope.message = {
-						code: 404,
-						text: 'The user is not a doctor.'
-					};
+				$scope.specialty = response;
+				$scope.showSpecialty = true;
+				if($scope.specialty.doctors.length > 0) {
+					$scope.existDoctors = true;
 				}
 			},
 			function(response) {

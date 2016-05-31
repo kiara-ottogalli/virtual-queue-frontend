@@ -129,3 +129,7 @@ h2, p { color: #323232; }
 
 /* Size of doctor and patient photos */
 .img-width-60{ width: 60px; }
+/* Size of current patient */
+.img-width-120{ width: 120px; }
+
+.padding-patients { padding-top: 40px; }
