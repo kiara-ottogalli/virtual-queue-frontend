@@ -15,8 +15,14 @@ angular
   ])
   .config(function ($stateProvider, $urlRouterProvider) {
     $stateProvider
+		.state('login', {
+				url: '/',
+				views: {
+					'content': { templateUrl: 'views/login.html', controller: 'LoginCtrl' },
+				}
+      })
       .state('specialties', {
-		url: '/',
+		url: '/specialties',
 		views: {
 			'header': { templateUrl: 'views/header.html' },
 			'content': { templateUrl: 'views/main.html', controller: 'MainCtrl' },
@@ -24,7 +30,7 @@ angular
 		}
       })
 	  .state('specialties.doctors', {
-		url: 'specialties/:id/doctors',
+		url: '/:id/doctors',
 		views: {
 			'header': { templateUrl: 'views/header.html' },
 			'content@': { templateUrl: 'views/doctors.html', controller: 'DoctorCtrl' },

@@ -133,3 +133,6 @@ h2, p { color: #323232; }
 .img-width-120{ width: 120px; }
 
 .padding-patients { padding-top: 40px; }
+
+/* Login page top margin */
+.top-margin-login { margin-top: 50px; }
