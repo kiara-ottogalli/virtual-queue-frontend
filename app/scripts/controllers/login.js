@@ -8,14 +8,20 @@
  * Controller of the virtualQueueFrontendApp
  */
 angular.module('virtualQueueFrontendApp')
-  .controller('LoginCtrl', ['$scope', '$localStorage', 'authFactory', function ($scope, $localStorage, authFactory) {
-    $scope.loginData = {username: 'Kiki'};
-    //$scope.loginData = $localStorage.getObject('userinfo', {username:'Kiki'});
+  .controller('LoginCtrl', ['$scope', '$rootScope', '$window', '$localStorage', 'authFactory', function ($scope, $rootScope, $window, $localStorage, authFactory) {
+    $scope.loginData = $localStorage.getObject('userinfo', '{}');
     
-    $scope.doLogin = function() {
+    $scope.login = function() {
       if($scope.rememberMe){
         $localStorage.storeObject('userinfo', $scope.loginData);
       }
       authFactory.login($scope.loginData);
     };
+    
+    $rootScope.$on('login:Successful', function () {
+      $rootScope.loggedIn = authFactory.isAuthenticated();
+      $rootScope.username = authFactory.getUsername();
+      $window.location.href = '#/specialties';
+    });
+    
   }]);

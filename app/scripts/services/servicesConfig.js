@@ -2,4 +2,4 @@
 
 angular
 	.module('virtualQueueFrontendApp')
-	.constant('baseURL', 'http://localhost:3000/');
+	.constant('baseURL', 'http://localhost:3000/api/');

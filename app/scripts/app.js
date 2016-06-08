@@ -11,6 +11,7 @@
 angular
   .module('virtualQueueFrontendApp', [
     'ngResource',
+		'ngDialog',
     'ui.router'
   ])
   .config(function ($stateProvider, $urlRouterProvider) {
@@ -24,7 +25,7 @@ angular
       .state('specialties', {
 		url: '/specialties',
 		views: {
-			'header': { templateUrl: 'views/header.html' },
+			'header': { templateUrl: 'views/header.html', controller: 'HeaderCtrl' },
 			'content': { templateUrl: 'views/main.html', controller: 'MainCtrl' },
 			'footer': { templateUrl: 'views/footer.html' }
 		}
@@ -32,7 +33,7 @@ angular
 	  .state('specialties.doctors', {
 		url: '/:id/doctors',
 		views: {
-			'header': { templateUrl: 'views/header.html' },
+			'header': { templateUrl: 'views/header.html', controller: 'HeaderCtrl' },
 			'content@': { templateUrl: 'views/doctors.html', controller: 'DoctorCtrl' },
 			'footer': { templateUrl: 'views/footer.html' }
 		}
@@ -40,7 +41,7 @@ angular
 	  .state('doctors', {
 		url: '/doctors',
 		views: {
-			'header': { templateUrl: 'views/header.html' },
+			'header': { templateUrl: 'views/header.html', controller: 'HeaderCtrl' },
 			'content': { templateUrl: 'views/patients.html', controller: 'PatientCtrl' },
 			'footer': { templateUrl: 'views/footer.html' }
 		}
@@ -48,7 +49,7 @@ angular
 	  .state('doctors.patients', {
 		url: '/:id',
 		views: {
-			'header': { templateUrl: 'views/header.html' },
+			'header': { templateUrl: 'views/header.html', controller: 'HeaderCtrl' },
 			'content@': { templateUrl: 'views/patients.html', controller: 'PatientCtrl' },
 			'footer': { templateUrl: 'views/footer.html' }
 		}
@@ -56,7 +57,7 @@ angular
 	  .state('about', {
 		url: '/about',
 		views: {
-			'header': { templateUrl: 'views/header.html' },
+			'header': { templateUrl: 'views/header.html', controller: 'HeaderCtrl' },
 			'content': { templateUrl: 'views/about.html', controller: 'AboutCtrl' },
 			'footer': { templateUrl: 'views/footer.html' }
 		}

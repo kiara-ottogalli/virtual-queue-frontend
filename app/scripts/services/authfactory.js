@@ -27,7 +27,7 @@ angular.module('virtualQueueFrontendApp')
       }
     };
   }])
-  .factory('authFactory', ['$http', '$localStorage', '$resource', 'baseURL', '$rootScope', function ($http, $localStorage, $resource, baseURL, $rootScope) {
+  .factory('authFactory', ['$http', '$localStorage', '$resource', 'baseURL', '$rootScope', 'ngDialog', function ($http, $localStorage, $resource, baseURL, $rootScope, ngDialog) {
     var authFac = {};
     var TOKEN_KEY = 'Token';
     var isAuthenticated = false;
@@ -66,19 +66,19 @@ angular.module('virtualQueueFrontendApp')
       $resource(baseURL + 'AppUsers/login').save(
         loginData,
         function(response) {
-          storeUserCredentials({username:loginData.username, token: response.token});
+          storeUserCredentials({username:loginData.username, token: response.id});
           $rootScope.$broadcast('login:Successful');
         },
         function(response){
           isAuthenticated = false;
           console.log(response);
-          //ngDialog.openConfirm({ template: 'loginUnsuccessful.html', controller: {name: response.data.err.name, message: response.data.err.message}});
+          ngDialog.openConfirm({ template: 'loginUnsuccessful.html', controller: {name: response.error.name, message: response.error.message}});
         }
       );
     };
     
     authFac.logout = function() {
-      $resource(baseURL + 'AppUsers/logout').get(function(){});
+      $resource(baseURL + 'AppUsers/logout').save(function(){});
       destroyUserCredentials();
     };
     
