@@ -24,4 +24,8 @@ angular.module('virtualQueueFrontendApp')
       $window.location.href = '#/specialties';
     });
     
+    $rootScope.$on('login:Unsuccessful', function () {
+      $scope.message = 'Wrong username or password.';
+    });
+    
   }]);

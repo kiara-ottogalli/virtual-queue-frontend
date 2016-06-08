@@ -11,7 +11,6 @@
 angular
   .module('virtualQueueFrontendApp', [
     'ngResource',
-		'ngDialog',
     'ui.router'
   ])
   .config(function ($stateProvider, $urlRouterProvider) {

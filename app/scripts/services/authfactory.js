@@ -27,7 +27,7 @@ angular.module('virtualQueueFrontendApp')
       }
     };
   }])
-  .factory('authFactory', ['$http', '$localStorage', '$resource', 'baseURL', '$rootScope', 'ngDialog', function ($http, $localStorage, $resource, baseURL, $rootScope, ngDialog) {
+  .factory('authFactory', ['$http', '$localStorage', '$resource', 'baseURL', '$rootScope', function ($http, $localStorage, $resource, baseURL, $rootScope) {
     var authFac = {};
     var TOKEN_KEY = 'Token';
     var isAuthenticated = false;
@@ -69,10 +69,9 @@ angular.module('virtualQueueFrontendApp')
           storeUserCredentials({username:loginData.username, token: response.id});
           $rootScope.$broadcast('login:Successful');
         },
-        function(response){
+        function(){
           isAuthenticated = false;
-          console.log(response);
-          ngDialog.openConfirm({ template: 'loginUnsuccessful.html', controller: {name: response.error.name, message: response.error.message}});
+          $rootScope.$broadcast('login:Unsuccessful');
         }
       );
     };
