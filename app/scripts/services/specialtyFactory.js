@@ -9,5 +9,9 @@ angular
 			return $resource(baseURL + 'specialties/:id', null, {'update': {method:'PUT'}});
 		};
 		
+        specialty.getSpecialtiesWithDoctors = function() {
+			return $resource(baseURL + 'specialties/:id?filter[include]=doctors', null, {'update': {method:'PUT'}});
+		};
+        
 		return specialty;
 	}]);

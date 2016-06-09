@@ -16,12 +16,12 @@
 				<p>Currently there are no doctors in this specialty.</p>
 			</div>
 		
-			<div class="col-sm-6" ng-if="existDoctors" ng-repeat="doctor in specialty.doctors">
+			<div class="col-sm-6" ng-if="existDoctors" ng-repeat="doctor in doctors">
 				<ul class="media-list">
 					<li class="media">
 						<div class="media-left media-middle">
-							<a ui-sref="specialties.doctors.patients({id:specialty.id, drid:doctor.id})">
-								<img class="media-object img-thumbnail img-circle img-width-60" ng-src="{{doctor.photo}}" alt="{{doctor.name}}">
+							<a ui-sref="doctors.patients({id:specialty.id, drid:doctor.id})">
+								<img class="media-object img-thumbnail img-circle img-width-60" ng-src="images/{{doctor.image}}" alt="{{doctor.name}} {{doctor.lastname}}">
 							</a>
 						</div>
 						<div class="media-body media-middle">
@@ -38,4 +38,12 @@
         </div>
 		
 	</div>
+    
+    <div class="row">
+        <div class="col-sm-12">
+            <a class="btn btn-primary pull-right" ui-sref="specialties" role="button">Back to specialties</a>
+        </div>
+        &nbsp;
+    </div>
+    
 </div>

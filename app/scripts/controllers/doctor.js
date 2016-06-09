@@ -11,17 +11,19 @@ angular
 	.module('virtualQueueFrontendApp')
 	.controller('DoctorCtrl', ['$scope', 'specialtyFactory', '$stateParams', function($scope, specialtyFactory, $stateParams) {
 		$scope.specialty = {};
+        $scope.doctors = [];
 		$scope.showSpecialty = false;
 		$scope.existDoctors = false;
         
-		specialtyFactory.getSpecialties().get(
+		specialtyFactory.getSpecialtiesWithDoctors().get(
 			{id: $stateParams.id},
 			function(response) {
 				$scope.specialty = response;
 				$scope.showSpecialty = true;
-				if($scope.specialty.doctors.length > 0) {
-					$scope.existDoctors = true;
-				}
+                $scope.doctors = $scope.specialty.doctors;
+                if($scope.doctors.length > 0){
+                    $scope.existDoctors = true;
+                }
 			},
 			function(response) {
 				$scope.message = {
@@ -29,4 +31,9 @@ angular
 					text: response.statusText
 				};
 			});
+        
+        $scope.getNumber = function() {
+            
+        };
+        
 	}]);

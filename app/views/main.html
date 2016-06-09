@@ -17,7 +17,7 @@
 		<div class="col-sm-6 col-md-4" ng-if="showSpecialties" ng-repeat="specialty in specialties">
 			<div class="thumbnail hover-gray">
 				<a ui-sref="specialties.doctors({id:specialty.id})">
-					<img class="img-responsive" ng-src={{specialty.image}} alt="{{specialty.name}}">
+					<img class="img-responsive" ng-src="images/{{specialty.image}}" alt="{{specialty.name}}">
 					<div class="caption text-center">
 						<h4 class="text-capitalize">{{specialty.name}}</h4>
 					</div>
