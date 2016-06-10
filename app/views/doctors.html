@@ -14,13 +14,13 @@
 		
 			<div class="col-xs-12" ng-if="!existDoctors">
 				<p>Currently there are no doctors in this specialty.</p>
-			</div>
-		
+            </div>
+            
 			<div class="col-sm-6" ng-if="existDoctors" ng-repeat="doctor in doctors">
 				<ul class="media-list">
 					<li class="media">
 						<div class="media-left media-middle">
-							<a ui-sref="doctors.patients({id:specialty.id, drid:doctor.id})">
+							<a ng-click="openDialog(doctor.id, token.userid)">
 								<img class="media-object img-thumbnail img-circle img-width-60" ng-src="images/{{doctor.image}}" alt="{{doctor.name}} {{doctor.lastname}}">
 							</a>
 						</div>

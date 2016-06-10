@@ -32,11 +32,13 @@ angular.module('virtualQueueFrontendApp')
     var TOKEN_KEY = 'Token';
     var isAuthenticated = false;
     var username = '';
+    var userid;
     var authToken;
     
     function useCredentials(credentials) {
       isAuthenticated = true;
       username = credentials.username;
+      userid = credentials.userid;
       authToken = credentials.token;
       // Set the token as header for your requests!
       $http.defaults.headers.common['x-access-token'] = authToken;
@@ -56,6 +58,7 @@ angular.module('virtualQueueFrontendApp')
     
     function destroyUserCredentials() {
       authToken = undefined;
+      userid = undefined;
       username = '';
       isAuthenticated = false;
       $http.defaults.headers.common['x-access-token'] = authToken;
@@ -66,7 +69,7 @@ angular.module('virtualQueueFrontendApp')
       $resource(baseURL + 'AppUsers/login').save(
         loginData,
         function(response) {
-          storeUserCredentials({username:loginData.username, token: response.id});
+          storeUserCredentials({username:loginData.username, token: response.id, userid: response.userId});
           $rootScope.$broadcast('login:Successful');
         },
         function(){
@@ -89,6 +92,14 @@ angular.module('virtualQueueFrontendApp')
         return username;  
     };
     
+    authFac.getUserId = function() {
+        return userid;  
+    };
+    
+    authFac.loadCredentials = function() {
+        loadUserCredentials();
+    };
+      
     loadUserCredentials();
     
     return authFac;

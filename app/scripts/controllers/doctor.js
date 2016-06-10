@@ -9,11 +9,12 @@
  */
 angular
 	.module('virtualQueueFrontendApp')
-	.controller('DoctorCtrl', ['$scope', 'specialtyFactory', '$stateParams', function($scope, specialtyFactory, $stateParams) {
+	.controller('DoctorCtrl', ['$scope', 'specialtyFactory', 'numberFactory', 'userFactory', '$stateParams', 'ngDialog', '$localStorage', function($scope, specialtyFactory, numberFactory, userFactory, $stateParams, ngDialog, $localStorage) {
 		$scope.specialty = {};
         $scope.doctors = [];
 		$scope.showSpecialty = false;
 		$scope.existDoctors = false;
+        $scope.token = $localStorage.getObject('Token', '{}');
         
 		specialtyFactory.getSpecialtiesWithDoctors().get(
 			{id: $stateParams.id},
@@ -32,8 +33,24 @@ angular
 				};
 			});
         
-        $scope.getNumber = function() {
-            
+        $scope.openDialog = function(doctorId, patientId) {            
+            ngDialog.openConfirm({template: 'views/number.html', controller: 'NumberCtrl', data: {doctorId: doctorId, patientId: patientId}});
+        };
+        
+        $scope.getNumber = function(doctorId, patientId) {
+            numberFactory.getNumbers().save({
+                doctorId: doctorId,
+                patientId: patientId
+            },
+            function(response){
+                console.log(response);
+            },
+            function(response){
+                $scope.message = {
+					code: response.status,
+					text: response.statusText
+				};
+            });
         };
         
 	}]);
