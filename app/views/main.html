@@ -1,5 +1,29 @@
 <div class="container">
 
+	<div class="row" ng-if="showNumbers">
+		<div class="col-sm-12">
+			<div class="page-header">
+				<h2>Your Numbers</h2>
+			</div>
+		</div>
+	</div>
+
+	<div class="row" ng-if="showNumbers">
+		<div class="col-sm-12">
+			<ul class="list-group">
+				<li class="list-group-item" ng-repeat="number in numbers" data-ng-mouseover="showCancelButton=true" data-ng-mouseleave="showCancelButton=false">
+					<h4>
+						<span class="label label-primary">{{number.position}}</span> 
+						Dr. {{number.doctor.name}} {{number.doctor.lastname}}
+						<small ng-if="!number.attending">will attend you soon.</small>
+						<small ng-if="number.attending">currently attending number {{number.attending}}</small>
+						<span class="glyphicon glyphicon-remove pull-right text-danger" aria-hidden="true" ng-if="showCancelButton" ng-click="cancelNumber(number)"></span>
+					</h4>					
+				</li>
+			</ul>
+		</div>
+	</div>
+
 	<div class="row">
 		<div class="col-sm-12">
 			<div class="page-header">

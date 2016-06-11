@@ -13,5 +13,9 @@ angular
 			return $resource(baseURL + 'AppUsers/:id/patientNumbers?filter[include]=patient&filter[order]=createdAt%20ASC', null, {'update': {method:'PUT'}});
 		};
         
+		userFact.getDoctors = function() {
+			return $resource(baseURL + 'AppUsers/:id/doctors?filter[include]=specialty&filter[include]=patientNumbers', null, {'update': {method:'PUT'}});
+		};
+
 		return userFact;
 	}]);
