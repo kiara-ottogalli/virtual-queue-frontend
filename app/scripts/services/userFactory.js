@@ -17,5 +17,9 @@ angular
 			return $resource(baseURL + 'AppUsers/:id/doctors?filter[include]=specialty&filter[include]=patientNumbers', null, {'update': {method:'PUT'}});
 		};
 
+		userFact.getRoles = function () {
+			return $resource(baseURL + 'AppUsers/:id/roles', null, {'update': {method:'PUT'}});
+		};
+
 		return userFact;
 	}]);

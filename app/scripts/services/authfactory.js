@@ -69,7 +69,12 @@ angular.module('virtualQueueFrontendApp')
       $resource(baseURL + 'AppUsers/login').save(
         loginData,
         function(response) {
-          storeUserCredentials({username:loginData.username, token: response.id, userid: response.userId});
+          var credentials = {
+            userid: response.userId,
+            username:loginData.username,
+            token: response.id
+          };
+          storeUserCredentials(credentials);
           $rootScope.$broadcast('login:Successful');
         },
         function(){
@@ -99,7 +104,7 @@ angular.module('virtualQueueFrontendApp')
     authFac.loadCredentials = function() {
         loadUserCredentials();
     };
-      
+
     loadUserCredentials();
     
     return authFac;

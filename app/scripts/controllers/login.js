@@ -27,5 +27,5 @@ angular.module('virtualQueueFrontendApp')
     $rootScope.$on('login:Unsuccessful', function () {
       $scope.message = 'Wrong username or password.';
     });
-    
+
   }]);

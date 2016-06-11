@@ -7,8 +7,8 @@
 			</div>
 		</div>
 	</div>
-	
-    <div ng-if="showDoctor">
+	{{current}}
+    <div ng-if="showPatients">
         
         <!-- Currently Attending -->
         <div class="row">
@@ -17,24 +17,24 @@
                     <div class="panel-body">
                         <div class="row" ng-if="existPatients && current">
                             <div class="col-sm-4">
-                                <img class="img-thumbnail img-responsive" ng-src="{{current.patient.photo}}" alt="{{current.patient.name}}">
+                                <img class="img-thumbnail img-responsive" ng-src="images/{{current.patient.image}}" alt="{{current.patient.name}}">
                             </div>
                             <div class="col-sm-8">
                                 <h3>{{current.patient.name}} {{current.patient.lastname}}</h3>
                                 <p><b>Phone:</b> {{current.patient.phone}}</p>
                                 <p><b>Email:</b> {{current.patient.email}}</p>
 
-                                <form class="form form-inline padding-patients pull-right">
+                                <form class="form form-inline padding-patients pull-right" ng-submit="callNext()">
                                     <div class="form-group">
                                         <label>Did the patient arrive?</label>
                                         <label class="radio-inline">
-                                            <input type="radio" name="inlineRadioOptions" id="inlineRadio1" value="yes" checked> Yes
+                                            <input type="radio" name="inlineRadioOptions" id="inlineRadio1" value="yes" ng-model="form.arrived" checked> Yes
                                         </label>
                                         <label class="radio-inline">
-                                            <input type="radio" name="inlineRadioOptions" id="inlineRadio2" value="no"> No
+                                            <input type="radio" name="inlineRadioOptions" id="inlineRadio2" value="no" ng-model="form.arrived"> No
                                         </label>
                                     </div>
-                                    &nbsp;&nbsp;<button type="submit" class="btn btn-primary" ng-click="callNext()">Call Next</button>
+                                    &nbsp;&nbsp;<button type="submit" class="btn btn-primary">Call Next</button>
                                 </form>
 
                             </div>
@@ -42,6 +42,13 @@
                         <div class="row" ng-if="!existPatients || !current">
                             <div class="col-sm-12">
                                 <p>Currently there is no patient being attended by the doctor.</p>
+                            </div>
+                        </div>
+                        <div class="row" ng-if="existPatients && !current">
+                            <div class="col-sm-12">
+                                <form class="form form-inline padding-patients pull-right">
+                                    <button type="submit" class="btn btn-primary" ng-click="callNext()">Call Next</button>
+                                </form>
                             </div>
                         </div>
                     </div>
@@ -65,7 +72,7 @@
                     <ul class="media-list">
                         <li class="media" ng-repeat="item in line">
                             <div class="media-left media-middle">
-                                <img class="media-object img-thumbnail img-circle img-width-60" ng-src="{{item.patient.photo}}" alt="{{item.patient.name}}">
+                                <img class="media-object img-thumbnail img-circle img-width-60" ng-src="images/{{item.patient.image}}" alt="{{item.patient.name}}">
                             </div>
                             <div class="media-body media-middle">
                                 <h4 class="media-heading">{{item.patient.name}} {{item.patient.lastname}}</h4>
@@ -92,7 +99,7 @@
                     <ul class="media-list">
                         <li class="media" ng-repeat="item in attended">
                             <div class="media-left media-middle">
-                                <img class="media-object img-thumbnail img-circle img-width-60" ng-src="{{item.patient.photo}}" alt="{{item.patient.name}}">
+                                <img class="media-object img-thumbnail img-circle img-width-60" ng-src="images/{{item.patient.image}}" alt="{{item.patient.name}}">
                             </div>
                             <div class="media-body media-middle">
                                 <h4 class="media-heading">{{item.patient.name}} {{item.patient.lastname}}</h4>
@@ -109,7 +116,7 @@
         </div>
         
     </div>
-    <div class="row" ng-if="!showDoctor">
+    <div class="row" ng-if="!showPatients">
         <div class="col-xs-12">
             <p class="text-danger">Oops! there's an error: {{message.code}} {{message.text}}</p>
         </div>
