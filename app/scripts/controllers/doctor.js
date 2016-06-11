@@ -34,7 +34,19 @@ angular
 			});
         
         $scope.openDialog = function(doctorId, patientId) {            
-            ngDialog.openConfirm({template: 'views/number.html', controller: 'NumberCtrl', data: {doctorId: doctorId, patientId: patientId}});
+            ngDialog.openConfirm({
+                template: 'views/number.html',
+                controller: 'NumberCtrl',
+                data: {doctorId: doctorId, patientId: patientId}
+            }).then(
+                function () {
+                    numberFactory.getNumbers().save({
+                        doctorId: doctorId,
+                        patientId: patientId
+                    });
+                    console.log('Saved number!');
+                }
+            );
         };
         
         $scope.getNumber = function(doctorId, patientId) {

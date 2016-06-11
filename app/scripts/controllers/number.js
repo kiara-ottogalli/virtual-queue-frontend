@@ -13,6 +13,8 @@ angular.module('virtualQueueFrontendApp')
     $scope.doctor = {};
     $scope.line = [];
     $scope.waiting = [];
+    $scope.lastNumber = 0;
+    $scope.currentNumber = 0;
     
     userFactory.getUsers().get({
         id: $scope.ngDialogData.doctorId
@@ -34,11 +36,14 @@ angular.module('virtualQueueFrontendApp')
         $scope.line = response;
         var i;
         for(i = 0; i < $scope.line.length; i++) {
-            console.log($scope.line[i]);
             if($scope.line[i].status === 'in line') {
                 $scope.waiting.push($scope.line[i]);
             }
+            if($scope.line[i].status === 'currently attending') {
+                $scope.currentNumber = i+1;
+            }
         }
+        $scope.lastNumber = $scope.waiting.length;
     },
     function(response){
         $scope.message2 = {

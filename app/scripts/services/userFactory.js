@@ -10,7 +10,7 @@ angular
 		};
         
         userFact.getPatientLine = function() {
-			return $resource(baseURL + 'AppUsers/:id/patientNumbers?filter[include]=patient', null, {'update': {method:'PUT'}});
+			return $resource(baseURL + 'AppUsers/:id/patientNumbers?filter[include]=patient&filter[order]=createdAt%20ASC', null, {'update': {method:'PUT'}});
 		};
         
 		return userFact;
