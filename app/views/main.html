@@ -14,7 +14,7 @@
 				<li class="list-group-item" ng-repeat="number in numbers" data-ng-mouseover="showCancelButton=true" data-ng-mouseleave="showCancelButton=false">
 					<h4>
 						<span class="label label-primary">{{number.position}}</span> 
-						Dr. {{number.doctor.name}} {{number.doctor.lastname}}
+						Dr. {{number.doctor.name}} {{number.doctor.lastname}} <span class="text-capitalize">({{number.doctor.specialty}})</span>
 						<small ng-if="!number.attending">will attend you soon.</small>
 						<small ng-if="number.attending">currently attending number {{number.attending}}</small>
 						<span class="glyphicon glyphicon-remove pull-right text-danger" aria-hidden="true" ng-if="showCancelButton" ng-click="cancelNumber(number)"></span>
