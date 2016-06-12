@@ -23,6 +23,12 @@ angular
 
 		$scope.token = $localStorage.getObject('Token', '{}');
 
+		$scope.today = new Date();
+		$scope.today.setHours(0);
+		$scope.today.setMinutes(0);
+		$scope.today.setSeconds(0);
+		$scope.today.setMilliseconds(0);
+
 		specialtyFactory.getSpecialties().query(
 			function(response) {
 				$scope.specialties = response;
@@ -42,15 +48,24 @@ angular
 			var found = false;
 			var i = 0;
 			var info = {numberId: 0, position: -1, status: '', attending: 0};
+			var notToday = 0;
+			while(i < line.length) {
+				var numDate = new Date(line[i].createdAt);
+				if(numDate < $scope.today) {
+					notToday++;
+				}
+				i++;
+			}
+			i = 0;
 			while(!found && i < line.length) {
 				if(line[i].patientId === patientId && (line[i].status === 'in line' || line[i].status === 'currently attending')) {
 					found = true;
-					info.position = i+1;
+					info.position = i+1-notToday;
 					info.status = line[i].status;
 					info.numberId = line[i].id;
 				}
 				if(line[i].status === 'currently attending') {
-					info.attending = i+1;
+					info.attending = i+1-notToday;
 				}
 				i++;
 			}
@@ -67,6 +82,7 @@ angular
 			var info;
 			for(i = 0; i < $scope.doctors.length; i++) {
 				info = searchPosition($scope.token.userid, $scope.doctors[i].patientNumbers);
+				console.log(info);
 				if(info.position !== -1) {
 					var doctor = {};
 					doctor.id = $scope.doctors[i].id;

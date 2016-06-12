@@ -21,6 +21,11 @@ angular
         $scope.line = [];
         $scope.attended = [];
 		$scope.form = {arrived: 'yes'};
+		$scope.today = new Date();
+		$scope.today.setHours(0);
+		$scope.today.setMinutes(0);
+		$scope.today.setSeconds(0);
+		$scope.today.setMilliseconds(0);
         
         var separateByType = function(patients){
             patients.forEach(function(item) {
@@ -53,7 +58,8 @@ angular
 		});
 		
 		userFactory.getPatientLine().query({
-			id: $stateParams.id
+			id: $stateParams.id,
+			'filter[where][createdAt][gt]': $scope.today.toISOString()
 		},
 		function(response){
 			$scope.patients = response;
@@ -72,9 +78,6 @@ angular
         
         $scope.callNext = function(){
 			if($scope.current) {
-				console.log($scope.current);
-				console.log($scope.form.arrived);
-				console.log($scope.form.arrived === 'yes');
 				if($scope.form.arrived === 'yes'){
 					$scope.current.status = 'attended';
 				}

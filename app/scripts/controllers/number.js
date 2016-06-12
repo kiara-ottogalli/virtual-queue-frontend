@@ -12,11 +12,15 @@ angular.module('virtualQueueFrontendApp')
       
     $scope.doctor = {};
     $scope.line = [];
-    $scope.waiting = [];
     $scope.lastNumber = 0;
     $scope.currentNumber = 0;
     $scope.alreadyInLine = false;
     $scope.lineNumber = 0;
+    $scope.today = new Date();
+    $scope.today.setHours(0);
+    $scope.today.setMinutes(0);
+    $scope.today.setSeconds(0);
+    $scope.today.setMilliseconds(0);
     
     userFactory.getUsers().get({
         id: $scope.ngDialogData.doctorId
@@ -32,24 +36,24 @@ angular.module('virtualQueueFrontendApp')
     });
       
     userFactory.getPatientLine().query({
-        id: $scope.ngDialogData.doctorId
+        id: $scope.ngDialogData.doctorId,
+		'filter[where][createdAt][gt]': $scope.today.toISOString()
     },
     function(response){
         $scope.line = response;
         var i;
         for(i = 0; i < $scope.line.length; i++) {
-            if($scope.line[i].status === 'in line') {
+            if($scope.line[i].status === 'in line' || $scope.line[i].status === 'currently attending') {
                 if($scope.line[i].patient.id === $scope.ngDialogData.patientId) {
                     $scope.alreadyInLine = true;
                     $scope.lineNumber = i+1;
                 }
-                $scope.waiting.push($scope.line[i]);
             }
             if($scope.line[i].status === 'currently attending') {
                 $scope.currentNumber = i+1;
             }
         }
-        $scope.lastNumber = $scope.waiting.length;
+        $scope.lastNumber = $scope.line.length + 1;
     },
     function(response){
         $scope.message2 = {
